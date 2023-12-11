@@ -1,5 +1,79 @@
-# apex.server.process
-Vou fornecer uma breve descrição em Markdown para incluir no README.md:
+# Funções JavaScript para Manipulação de Mensagens e Validação de Campos
+
+A seguir estão alguns exemplos de funções JavaScript utilizadas para manipular mensagens e validar campos no Oracle APEX.
+
+## Exemplo de Exibição de Alerta
+
+```javascript
+// Exibe um alerta com a resposta correta baseada no valor do item P2_SERVICO
+apex.message.alert("The correct answer is: " + apex.item("P2_SERVICO").displayValueFor("APPLES"));
+```
+
+## Função para Exibir Notificação Personalizada
+
+```javascript
+function show_notification(Msg){  
+    apex.message.showPageSuccess(Msg); 
+    $('#t_Alert_Success').addClass('u-warning');         
+    $('.t-Alert-title').attr('style','color: black;font-weight: normal; font-size: 1em;');         
+    $('#t_Alert_Success div div.t-Alert-icon span').removeClass('t-Icon').addClass('fa fa-2x fa-warning u-danger-text');
+}
+
+// Exibe uma notificação personalizada
+show_notification("The correct answer is: "  + apex.item("P2_SERVICO").displayValueFor("APPLES"));
+```
+
+## Validação de Campos e Exibição de Erros
+
+```javascript
+// Limpa os erros existentes
+apex.message.clearErrors();
+
+// Validação do campo P2_SERVICO
+if (apex.item("P2_SERVICO").isEmpty()) {
+    apex.message.showErrors([
+        {
+            type: "error",
+            location: ["page", "inline"],
+            pageItem: "P2_SERVICO",
+            message: "O nome é obrigatório!",
+            unsafe: false
+        }
+    ]);
+}
+
+// Validação do campo P2_QTD
+if (apex.item("P2_QTD").isEmpty()) {
+    apex.message.showErrors([
+        {
+            type: "error",
+            location: ["page", "inline"],
+            pageItem: "P2_QTD",
+            message: "A quantidade é obrigatória!",
+            unsafe: false
+        }
+    ]);
+}
+
+// Validação do campo P2_VALOR
+if (apex.item("P2_VALOR").isEmpty()) {
+    apex.message.showErrors([
+        {
+            type: "error",
+            location: ["page", "inline"],
+            pageItem: "P2_VALOR",
+            message: "O valor é obrigatório!",
+            unsafe: false
+        }
+    ]);
+}
+```
+
+Lembre-se de adaptar as mensagens, identificadores de itens e lógica de validação conforme necessário para atender aos requisitos específicos do seu aplicativo Oracle APEX.
+```
+
+Essa documentação fornece uma visão geral do propósito e funcionamento de cada trecho de código JavaScript. Certifique-se de personalizar conforme necessário para o seu contexto específico.
+
 
 # Atualização de Região no Oracle APEX usando JavaScript
 
@@ -33,4 +107,4 @@ Este código JavaScript é utilizado para realizar as seguintes ações:
 
 Lembre-se de ajustar os identificadores de item, processo e região conforme necessário para o seu aplicativo Oracle APEX.
 
-```
+
